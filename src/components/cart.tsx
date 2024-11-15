@@ -11,6 +11,7 @@ interface Product {
     amount: number;
   }
    
+ 
 
 const Cart: React.FC = () => {
   const { cart } = useContext(productContext);

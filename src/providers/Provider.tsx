@@ -9,13 +9,14 @@ interface Product {
   price: number;
 }
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
     amount: number;
   }
 
 interface ProviderProps {
   children: ReactNode;
 }
+
 
 const Provider: React.FC<ProviderProps> = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -35,6 +36,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
       }
     }); console.log(cart);
   };
+  
 
   const providerValues = {
     selectedProduct,

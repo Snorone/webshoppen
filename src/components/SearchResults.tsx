@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import SearchForm from "./SearchForm";
 import ProductModal from "./ProductModal";
 import productContext from "../context/productContext";
@@ -13,7 +13,7 @@ interface Product {
 
 export default function SearchResults() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const { selectedProduct, setSelectedProduct } = useContext(productContext); // Hämtar båda från kontext
+  const { selectedProduct, setSelectedProduct } = useContext(productContext);
 
   async function fetchData(): Promise<Product[]> {
     try {
@@ -37,11 +37,11 @@ export default function SearchResults() {
   };
 
   const handleOpenModal = (product: Product) => {
-    setSelectedProduct(product); // Använder `setSelectedProduct` från kontext för att öppna modalen
+    setSelectedProduct(product); 
   };
 
   const handleCloseModal = () => {
-    setSelectedProduct(null); // Använder `setSelectedProduct` från kontext för att stänga modalen
+    setSelectedProduct(null);
   };
 
   return (

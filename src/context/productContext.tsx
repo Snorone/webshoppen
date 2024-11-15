@@ -1,8 +1,7 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
+import { CartItem } from '../providers/Provider';
 
 interface Product {
-  map(arg0: (item: Product) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
-  length: number;
   id: number;
   title: string;
   description: string;
@@ -12,23 +11,26 @@ interface Product {
  
 
 
-interface ProductContextType {
+export interface ProductContextType {
   selectedProduct: Product | null;
   setSelectedProduct: Dispatch<SetStateAction<Product | null>>;
-  cart: Product
+  cart: CartItem[]
+  addToCart: (product: Product) => void;
 }
 
 
 const productContext = createContext<ProductContextType>({
   selectedProduct: null,
   setSelectedProduct: () => {},
-  cart: {
+  cart: [{
      id: 0,
      title: '',
      description: '',
      thumbnail: '',
-     price: 0
-  },
+     price: 0,
+     amount: 1,
+  },],
+  addToCart: () => {},
 });
 
 export default productContext;
