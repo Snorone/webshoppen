@@ -1,0 +1,89 @@
+import React, { useState, useContext } from "react";
+import SearchForm from "./SearchForm";
+import ProductModal from "./ProductModal";
+import productContext from "../context/productContext";
+
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+  price: number;
+}
+
+export default function SearchResults() {
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const { selectedProduct, setSelectedProduct } = useContext(productContext); // Hämtar båda från kontext
+
+  async function fetchData(): Promise<Product[]> {
+    try {
+      const response = await fetch(
+        'https://dummyjson.com/products?limit=50&skip=10&select=title,price,thumbnail,description'
+      );
+      const data = await response.json();
+      return data.products;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  }
+
+  const handleSearch = async (searchTerm: string) => {
+    const data = await fetchData();
+    const filteredResults = data.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredResults);
+  };
+
+  const handleOpenModal = (product: Product) => {
+    setSelectedProduct(product); // Använder `setSelectedProduct` från kontext för att öppna modalen
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null); // Använder `setSelectedProduct` från kontext för att stänga modalen
+  };
+
+  return (
+    <>
+      <h1>WebShop</h1>
+      <hr />
+      <SearchForm onSearch={handleSearch} />
+      <div>
+        <h2>Sökresultat:</h2>
+        {searchResults.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Produkt</th>
+                <th>Bild</th>
+                <th>Pris</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResults.map((product) => (
+                <tr key={product.id}>
+                  <td>
+                    {product.title}{" "}
+                    <button onClick={() => handleOpenModal(product)}>
+                      Läs mer
+                    </button>
+                  </td>
+                  <td>
+                    <img src={product.thumbnail} alt={product.title} height="50" />
+                  </td>
+                  <td>{product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>Inga produkter hittades.</p>
+        )}
+      </div>
+      {selectedProduct && (
+        <ProductModal product={selectedProduct} onClose={handleCloseModal} />
+      )}
+    </>
+  );
+}
