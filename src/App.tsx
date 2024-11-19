@@ -4,6 +4,7 @@ import NavBar from "./components/Navbar";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Shop from "./components/Shop";
+import Cart from "./components/Cart";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Provider from "./providers/Provider";
 
@@ -21,6 +22,7 @@ function App() {
                <Route path="/about" element={<About />} />
                <Route path="/contact" element={<Contact />} />
                <Route path="/shop" element={<Shop />} />
+               <Route path="/cart" element={<Cart />} />
                {/* <Route path="*" element={<NotFound />}/> */}
           </Routes>
    </main>

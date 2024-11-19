@@ -16,6 +16,7 @@ export interface ProductContextType {
   setSelectedProduct: Dispatch<SetStateAction<Product | null>>;
   cart: CartItem[]
   addToCart: (product: Product) => void;
+  setCart:Dispatch<SetStateAction<CartItem[]>>
 }
 
 
@@ -31,6 +32,7 @@ const productContext = createContext<ProductContextType>({
      amount: 1,
   },],
   addToCart: () => {},
+  setCart: () => {}
 });
 
 export default productContext;

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import productContext from '../context/productContext';
-import Cart from './cart';
 
 interface Product {
   id: number;
@@ -29,7 +28,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
         <p>{product.description}</p>
         <p>Pris: {product.price} kr</p>
         <button onClick={() => addToCart(product)}>Lägg till i kundvagn</button>
-      <Cart/> </div>
+     </div>
      
     </div>
   );

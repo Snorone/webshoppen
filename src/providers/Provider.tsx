@@ -43,6 +43,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     setSelectedProduct,
     cart,
     addToCart,
+    setCart,
   };
 
   return (
