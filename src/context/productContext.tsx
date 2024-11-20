@@ -19,21 +19,23 @@ export interface ProductContextType {
   setCart:Dispatch<SetStateAction<CartItem[]>>
 }
 
+const productContext = createContext<ProductContextType|undefined>(undefined)
 
-const productContext = createContext<ProductContextType>({
-  selectedProduct: null,
-  setSelectedProduct: () => {},
-  cart: [{
-     id: 0,
-     title: '',
-     description: '',
-     thumbnail: '',
-     price: 0,
-     amount: 1,
-  },],
-  addToCart: () => {},
-  setCart: () => {}
-});
+
+// const productContext = createContext<ProductContextType>({
+//   selectedProduct: null,
+//   setSelectedProduct: () => {},
+//   cart: [{
+//      id: 0,
+//      title: '',
+//      description: '',
+//      thumbnail: '',
+//      price: 0,
+//      amount: 1,
+//   },],
+//   addToCart: () => {},
+//   setCart: () => {}
+// });
 
 export default productContext;
 
