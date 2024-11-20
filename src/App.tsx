@@ -1,10 +1,11 @@
 // import { useState } from 'react'
+import Cart from "./components/Cart";
 import Home from "./components/Home";
 import NavBar from "./components/Navbar";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Shop from "./components/Shop";
-import Cart from "./components/cart";
+
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Provider from "./providers/Provider";
 
