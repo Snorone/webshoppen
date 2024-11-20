@@ -4,7 +4,7 @@ import ProductModal from "./ProductModal";
 import productContext from "../context/productContext";
 
 interface Product {
-  id: number;
+  id: number
   title: string;
   description: string;
   thumbnail: string;
@@ -13,8 +13,11 @@ interface Product {
 
 export default function SearchResults() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
-  const { selectedProduct, setSelectedProduct } = useContext(productContext);
+  const pV = useContext(productContext)
+  // const { selectedProduct, setSelectedProduct } = useContext<Product|null>(productContext);
 
+
+  //function to fetch data from api
   async function fetchData(): Promise<Product[]> {
     try {
       const response = await fetch(
@@ -28,6 +31,7 @@ export default function SearchResults() {
     }
   }
 
+//search 
   const handleSearch = async (searchTerm: string) => {
     const data = await fetchData();
     const filteredResults = data.filter((product) =>
@@ -37,11 +41,11 @@ export default function SearchResults() {
   };
 
   const handleOpenModal = (product: Product) => {
-    setSelectedProduct(product); 
+    pV.setSelectedProduct(product); 
   };
 
   const handleCloseModal = () => {
-    setSelectedProduct(null);
+    pV.setSelectedProduct(null);
   };
 
   return (
@@ -81,8 +85,8 @@ export default function SearchResults() {
           <p>Inga produkter hittades.</p>
         )}
       </div>
-      {selectedProduct && (
-        <ProductModal product={selectedProduct} onClose={handleCloseModal} />
+      {pV.selectedProduct && (
+        <ProductModal onClose={handleCloseModal} />
       )}
     </>
   );

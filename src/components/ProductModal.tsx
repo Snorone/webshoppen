@@ -1,21 +1,12 @@
 import React, { useContext } from 'react';
 import productContext from '../context/productContext';
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  price: number;
-}
-
 interface ProductModalProps {
-  product: Product | null;
   onClose: () => void;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
-  if (!product) return null;
+const ProductModal: React.FC<ProductModalProps> = ({ onClose }) => {
+  const pV = useContext(productContext)
 
   const { addToCart } = useContext(productContext);
 
@@ -23,11 +14,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>X</button>
-        <h2>{product.title}</h2>
-        <img src={product.thumbnail} alt={product.title} width="100" />
-        <p>{product.description}</p>
-        <p>Pris: {product.price} kr</p>
-        <button onClick={() => addToCart(product)}>Lägg till i kundvagn</button>
+        <h2>{pV.selectedProduct?.title}</h2>
+        <img src={pV.selectedProduct?.thumbnail} alt={pV.selectedProduct?.title} width="100" />
+        <p>{pV.selectedProduct?.description}</p>
+        <p>Pris: {pV.selectedProduct?.price} kr</p>
+        <button onClick={() => {if(pV.selectedProduct) addToCart(pV.selectedProduct)}}>Lägg till i kundvagn</button>
      </div>
      
     </div>
