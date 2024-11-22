@@ -19,7 +19,7 @@ const Cart: React.FC = () => {
   const { cart, setCart } = useContext(productContext);
 
   
-
+    // Beräknar det totala priset för produkterna i kundvagnen
   const sumOfPrice = (cart1: {id: number; price: number; amount: number }[]) => {
     return cart1.reduce((total, item) => total + item.price * item.amount, 0)
     
@@ -28,8 +28,9 @@ const Cart: React.FC = () => {
 const totalPrice = sumOfPrice(cart);
 const totalPriceRounded = parseFloat(totalPrice.toFixed(2));
 
-const removeItem = (id: number)=>{
 
+// Tar bort produkt från kundvagnen
+const removeItem = (id: number)=>{
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 };
 
@@ -41,6 +42,7 @@ const removeItem = (id: number)=>{
       {cart.length > 0 ? (
         <>
         <ul>
+          {/* Loopar igenom kundvagnens produkter och visar information */}
           {cart.map((item: Product) => (
             <li key={item.id}>
             <div>Product: {item.title}</div> 

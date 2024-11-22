@@ -8,26 +8,28 @@ import Shop from "./components/Shop";
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Provider from "./providers/Provider";
-
+// Huvudfilen som ansvarar för routning och komponentstruktur.
 
 
 function App() {
-
   return (
     <Provider> 
-    <div className="center-container">  <Router>
-    <NavBar />
-<main>
-    <Routes>
+      {/* Centraliserad kontext för att dela data mellan komponenter */}
+      <div className="center-container">
+        <Router>
+          <NavBar />
+          <main>
+            <Routes>
+              {/* Definierar applikationens olika sidor med routning */}
               <Route path="/" element={<Home />} />
-               <Route path="/about" element={<About />} />
-               <Route path="/contact" element={<Contact />} />
-               <Route path="/shop" element={<Shop />} />
-               <Route path="/cart" element={<Cart />} />
-               {/* <Route path="*" element={<NotFound />}/> */}
-          </Routes>
-   </main>
-    </Router>    </div>  
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </main>
+        </Router>
+      </div>  
     </Provider>
   )
 }

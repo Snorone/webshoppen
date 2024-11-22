@@ -10,7 +10,7 @@ interface Product {
 }
  
 
-
+// Definierar formatet för ProductContextType för att standardisera värden och funktioner
 export interface ProductContextType {
   selectedProduct: Product | null;
   setSelectedProduct: Dispatch<SetStateAction<Product | null>>;
@@ -18,9 +18,6 @@ export interface ProductContextType {
   addToCart: (product: Product) => void;
   setCart:Dispatch<SetStateAction<CartItem[]>>
 }
-
-// const productContext = createContext<ProductContextType|undefined>(undefined)
-
 
 const productContext = createContext<ProductContextType>({
   selectedProduct: null,

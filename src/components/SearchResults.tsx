@@ -14,10 +14,10 @@ interface Product {
 export default function SearchResults() {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const pV = useContext(productContext)
-  // const { selectedProduct, setSelectedProduct } = useContext<Product|null>(productContext);
+ 
 
 
-  //function to fetch data from api
+   // Funktion för att hämta produktdata från API
   async function fetchData(): Promise<Product[]> {
     try {
       const response = await fetch(
@@ -34,6 +34,7 @@ export default function SearchResults() {
 //search 
   const handleSearch = async (searchTerm: string) => {
     const data = await fetchData();
+    // Filtrerar produkter baserat på användarens sökterm
     const filteredResults = data.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );

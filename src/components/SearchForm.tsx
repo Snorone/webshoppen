@@ -8,10 +8,13 @@ interface SearchFormProps {
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) =>{
   const [searchTerm, setSearchTerm] = useState<string>('');
 
+         // Uppdaterar sökterm när användaren skriver i sökfältet
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
+
+  // Skickar sökterm till parent-komponenten
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault(); 
     onSearch(searchTerm); 
